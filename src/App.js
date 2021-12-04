@@ -3,8 +3,8 @@ import ScatterPlot from "./ScatterPlot";
 import useDummyData from "./useDummyData";
 
 const Viewport = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
   background-color: #222;
 `;
 

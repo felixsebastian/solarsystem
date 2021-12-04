@@ -1,5 +1,5 @@
-
 import Plot from "react-plotly.js";
+import { times } from "lodash";
 
 const unpack = (csv, key) => {
   const index = csv[0].indexOf(key);
@@ -22,23 +22,41 @@ const createTrace = (csv, num, color) => ({
     opacity: 0.8,
     line: {
       color: color,
-      width: 0.5
-    }
-  }
+      width: 0.5,
+    },
+  },
 });
 
 const ScatterPlot = ({ data }) => (
   <Plot
     data={[
       createTrace(data, 1, "rgba(217, 217, 217, 0.14)"),
-      createTrace(data, 2, "rgb(204, 204, 204)")
+      createTrace(data, 2, "rgb(204, 204, 204)"),
     ]}
-    layout={ {width: 320, height: 240, showlegend: false, margin: {
+    layout={{
+      ...times(10, (i) => ({
+        ["xaxis" + (i || "")]: {
+          showgrid: false,
+          zeroline: false,
+        },
+        ["yaxis" + (i || "")]: {
+          showgrid: false,
+          zeroline: false,
+        },
+      })),
+      width: 600,
+      height: 400,
+      showlegend: false,
+      margin: {
         l: 0,
         r: 0,
         b: 0,
         t: 0,
-      }} }
+      },
+    }}
+    config={{
+      scrollZoom: true,
+    }}
   />
 );
 
